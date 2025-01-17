@@ -106,7 +106,7 @@ export default function AssignmentEditor() {
         </tr>
       </table>
       <hr/>
-      <div align="right">
+      <div style={{display: 'flex', justifyContent: 'end'}}>
         <button>Cancel</button>
         <button>Save</button>
       </div>
