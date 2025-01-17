@@ -166,7 +166,7 @@ export default function Lab1() {
         <br />
         Loading a local image:
         <br />
-        <img id="wd-teslabot" src="src/assets/react.svg" height="200px" />
+        <img id="wd-teslabot" src="/images/reactjs.webp" height="200px" />
       </div>
 
       <div id="wd-forms">
