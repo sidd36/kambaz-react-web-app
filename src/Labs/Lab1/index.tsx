@@ -274,6 +274,7 @@ export default function Lab1() {
           Please
           <a href="https://www.lipsum.com" id="wd-lipsum">click here</a>
           to get dummy text<br/>
+          <a href="https://github.com/sidd36/kambaz-react-web-app/tree/a1" id="wd-github">Link to respository</a><br/>
         </form>
       </div>
 
