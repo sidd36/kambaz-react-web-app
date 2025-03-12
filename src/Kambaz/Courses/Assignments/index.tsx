@@ -1,16 +1,46 @@
 import { Button, FormControl, FormGroup, InputGroup, ListGroup } from "react-bootstrap";
 import { BsGripVertical } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaTrash } from "react-icons/fa6";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { MdEditDocument } from "react-icons/md";
-import { useParams } from "react-router";
-import { assignments } from "../../Database";
+import { useNavigate, useParams } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAssignment, setTempAssignment } from "./reducer";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assgns = assignments.filter(a => a.course === cid);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const dispatch = useDispatch();
+  const assgns = assignments.filter((a: any) => a.course === cid);
+  const navigate = useNavigate();
+
+  const createAssignment = () => {
+    const tempAssignment = {
+      _id: "A" + Math.floor(Math.random() * (999 - 100 + 1) + 100),
+      title: "New Assignment",
+      course: cid,
+      availableDt: "",
+      availableTime: "12:00am",
+      dueDt: "",
+      dueTime: "11:59pm",
+      untilDt: "",
+      untilTime: "11:59pm",
+      points: 100,
+      desc: "New Assignment Description"
+    };
+    dispatch(setTempAssignment(tempAssignment));
+    navigate(`/Kambaz/Courses/${cid}/Assignments/${tempAssignment._id}`);
+  }
+
+  const deleteAssgn = (id: string) => {
+    dispatch(deleteAssignment(id))
+  }
+
   return (
     <div id="wd-assignments">
       <div style={{ display: "flex" }}>
@@ -22,10 +52,13 @@ export default function Assignments() {
         </FormGroup>
       </div>
       <div style={{ marginTop: "-37px" }}>
-        <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-assignment">
-          <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-          Assignment
-        </Button>
+        {currentUser.role === "FACULTY" &&
+          <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-assignment"
+            onClick={() => createAssignment()}>
+            <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+            Assignment
+          </Button>
+        }
         <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-add-assignment-group">
           <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
           Group
@@ -42,15 +75,21 @@ export default function Assignments() {
           </div>
           <ListGroup className="wd-assignment-list rounded-0">
             {
-              assgns.map(assgn => (
+              assgns.map((assgn: any) => (
                 <ListGroup.Item className="wd-assignment-list-item p-3 ps-1">
                   <BsGripVertical className="me-2 fs-3" />
                   <MdEditDocument style={{ color: "green" }} />
-                  <a href={`#/Kambaz/Courses/${cid}/Assignments/${assgn._id}`}
+                  {currentUser.role === "FACULTY" && <a href={`#/Kambaz/Courses/${cid}/Assignments/${assgn._id}`}
                     className="wd-assignment-link" >
                     {assgn._id} - {assgn.title} <br />
-                  </a>
+                  </a>}
+                  {currentUser.role !== "FACULTY" && <span className="wd-assignment-link" >
+                    {assgn._id} - {assgn.title} <br />
+                  </span>}
                   <LessonControlButtons />
+                  {currentUser.role === "FACULTY" &&
+                    <FaTrash className="text-danger me-2 mt-2 float-end" data-bs-toggle="modal" data-bs-target="#wd-delete-assgn-dialog" />}
+                    <ConfirmationPopup title={assgn.title} id={assgn._id}></ConfirmationPopup>
                   <div className="wd-assignment-modules">
                     <span className="wd-assignment-modules-red">Multiple Modules</span> | <b>Not available until</b> {assgn.availableDt} at {assgn.availableTime} | <br />
                     <b>Due</b> {assgn.dueDt} at {assgn.dueTime} | {assgn.points} pts
@@ -63,4 +102,30 @@ export default function Assignments() {
       </ListGroup>
     </div>
   );
+
+  function ConfirmationPopup({title, id}: {title: string, id: string}) {
+    return (
+        <div id="wd-delete-assgn-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                            Delete Assignment? </h1>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div className="modal-body">
+                            Are you sure you want to delete - <b><i>{title}</i></b> ?
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel </button>
+                        <button onClick={() => deleteAssgn(id)} type="button" data-bs-dismiss="modal" className="btn btn-danger">
+                            Yes </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+  }
 }
+

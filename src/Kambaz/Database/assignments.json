@@ -9,7 +9,8 @@
         "dueTime": "11:59pm",
         "untilDt": "May 20 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     },
     {
         "_id": "A102",
@@ -21,7 +22,8 @@
         "dueTime": "11:59pm",
         "untilDt": "May 27 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     },
     {
         "_id": "A103",
@@ -33,7 +35,8 @@
         "dueTime": "11:59pm",
         "untilDt": "June 03 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     },
     {
         "_id": "A201",
@@ -45,7 +48,8 @@
         "dueTime": "11:59pm",
         "untilDt": "June 17 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     },
     {
         "_id": "A202",
@@ -57,7 +61,8 @@
         "dueTime": "11:59pm",
         "untilDt": "June 24 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     },
     {
         "_id": "A203",
@@ -69,7 +74,8 @@
         "dueTime": "11:59pm",
         "untilDt": "July 01 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     },
     {
         "_id": "A301",
@@ -81,7 +87,8 @@
         "dueTime": "11:59pm",
         "untilDt": "July 08 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     },
     {
         "_id": "A302",
@@ -93,7 +100,8 @@
         "dueTime": "11:59pm",
         "untilDt": "July 15 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     },
     {
         "_id": "A303",
@@ -105,6 +113,7 @@
         "dueTime": "11:59pm",
         "untilDt": "July 22 2024",
         "untilTime": "11:59pm",
-        "points": 100
+        "points": 100,
+        "desc": "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section links to each of the lab assignments Link to the Kambaz application Links to all relevant source code repositories The Kambaz application should include a link to navigate back to the landing page."
     }
 ]
