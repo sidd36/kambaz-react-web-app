@@ -3,6 +3,8 @@ import { AiOutlineDashboard, AiOutlineExperiment } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { setTempAssignment } from "./Courses/Assignments/reducer";
 export default function KambazNavigation() {
   const { pathname } = useLocation();
   const links = [
@@ -12,6 +14,7 @@ export default function KambazNavigation() {
     { label: "Inbox", path: "/Kambaz/Inbox", icon: FaInbox },
     { label: "Labs", path: "/Labs", icon: AiOutlineExperiment },
   ];
+  const dispatch = useDispatch();
   return (
     <div id="wd-kambaz-navigation" style={{ width: 115 }}
       className="list-group rounded-0 position-fixed
@@ -29,7 +32,7 @@ export default function KambazNavigation() {
       </Link>
 
       {links.map((link) => (
-        <Link key={link.path} to={link.path} className={`list-group-item text-center border-0
+        <Link key={link.path} onClick={() => dispatch(setTempAssignment(null))} to={link.path} className={`list-group-item text-center border-0
               ${pathname.includes(link.label) ? "text-danger bg-white" : "text-white bg-black"}`}>
           {link.icon({ className: "fs-1 text-danger" })}
           <br />
