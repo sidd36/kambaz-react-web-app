@@ -7,16 +7,18 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { MdEditDocument } from "react-icons/md";
 import { useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment, setTempAssignment } from "./reducer";
+import { deleteAssignment, setAssignments, setTempAssignment } from "./reducer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import * as assignmentClient from "./client";
+import { useEffect } from "react";
 
 export default function Assignments() {
   const { cid } = useParams();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
-  const assgns = assignments.filter((a: any) => a.course === cid);
+  let assgns = assignments.filter((a: any) => a.course === cid);
   const navigate = useNavigate();
 
   const createAssignment = () => {
@@ -37,9 +39,23 @@ export default function Assignments() {
     navigate(`/Kambaz/Courses/${cid}/Assignments/${tempAssignment._id}`);
   }
 
-  const deleteAssgn = (id: string) => {
-    dispatch(deleteAssignment(id))
+  const deleteAssgn = async(id: string) => {
+    await assignmentClient.deleteAssignment(id);
+    dispatch(deleteAssignment(id));
   }
+
+  const fetchAssignments = async () => {
+    const assignments = await assignmentClient.fetchAllAssignments();
+    dispatch(setAssignments(assignments));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, [])
+
+  useEffect(() => {
+    assgns = assignments.filter((a: any) => a.course === cid);
+  }, [assignments])
 
   return (
     <div id="wd-assignments">
@@ -88,7 +104,7 @@ export default function Assignments() {
                   </span>}
                   <LessonControlButtons />
                   {currentUser.role === "FACULTY" &&
-                    <FaTrash className="text-danger me-2 mt-2 float-end" data-bs-toggle="modal" data-bs-target="#wd-delete-assgn-dialog" />}
+                    <FaTrash className="text-danger me-2 mt-2 float-end" data-bs-toggle="modal" data-bs-target={`#wd-delete-assgn-dialog-${assgn._id}`} />}
                     <ConfirmationPopup title={assgn.title} id={assgn._id}></ConfirmationPopup>
                   <div className="wd-assignment-modules">
                     <span className="wd-assignment-modules-red">Multiple Modules</span> | <b>Not available until</b> {assgn.availableDt} at {assgn.availableTime} | <br />
@@ -105,7 +121,7 @@ export default function Assignments() {
 
   function ConfirmationPopup({title, id}: {title: string, id: string}) {
     return (
-        <div id="wd-delete-assgn-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div id={`wd-delete-assgn-dialog-${id}`} className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">

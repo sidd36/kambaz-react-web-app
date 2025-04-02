@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addAssignment, setTempAssignment, updateAssignment } from "./reducer";
 import { useEffect, useState } from "react";
+import * as assignmentClient from "./client";
 
 export default function AssignmentEditor() {
   const { aid } = useParams();
@@ -15,12 +16,14 @@ export default function AssignmentEditor() {
       setAssignment(tempAssignment);
     }
   }, [tempAssignment]);
-  const save = () => {
+  const save = async () => {
     if (assignment.length !== 0) {
+      await assignmentClient.updateAssignment(assgn);
       dispatch(updateAssignment(assgn));
     } else {
       dispatch(setTempAssignment(null));
-      dispatch(addAssignment(assgn))
+      await assignmentClient.createAssignment(assgn);
+      dispatch(addAssignment(assgn));
     }
   }
   const dispatch = useDispatch();

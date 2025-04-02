@@ -20,10 +20,19 @@ export default function TOC() {
        <Nav.Link id="wd-a4" href="#/Labs/Lab4" className={`${pathname.includes("Lab4") ? "active" : ""}`}>Lab 4</Nav.Link>
      </Nav.Item>
      <Nav.Item>
+       <Nav.Link id="wd-a5" href="#/Labs/Lab5" className={`${pathname.includes("Lab5") ? "active" : ""}`}>Lab 5</Nav.Link>
+     </Nav.Item>
+     <Nav.Item>
        <Nav.Link id="wd-k" href="#/Kambaz">Kambaz</Nav.Link>
      </Nav.Item>
      <Nav.Item>
-       <Nav.Link className="github" id="wd-github" target="_blank" href="https://github.com/sidd36/kambaz-react-web-app">My GitHub</Nav.Link>
+       <Nav.Link className="github" id="wd-github-react" target="_blank" href="https://github.com/sidd36/kambaz-react-web-app">My GitHub - React</Nav.Link>
+     </Nav.Item>
+     <Nav.Item>
+       <Nav.Link className="github" id="wd-github-node" target="_blank" href="https://github.com/sidd36/kambaz-node-server-app">My GitHub - Node</Nav.Link>
+     </Nav.Item>
+     <Nav.Item>
+       <Nav.Link id="wd-server" target="_blank" href="https://kambaz-node-server-app-sidd-f68f7c891670.herokuapp.com">Server Link</Nav.Link>
      </Nav.Item>
    </Nav>
 );}
