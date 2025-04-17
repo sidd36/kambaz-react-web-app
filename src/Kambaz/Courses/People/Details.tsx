@@ -36,6 +36,9 @@ export default function PeopleDetails() {
         if (!uid) return;
         const user = await client.findUserById(uid);
         setUser(user);
+        setEmail(user.email);
+        setName(user.firstName + " " + user.lastName);
+        setRole(user.role);
     };
     useEffect(() => {
         if (uid) fetchUser();
@@ -60,7 +63,7 @@ export default function PeopleDetails() {
                         {user.firstName} {user.lastName}</div>)}
                 {user && editing === "name" && (
                     <FormControl className="w-50 wd-edit-name"
-                        defaultValue={`${user.firstName} ${user.lastName}`}
+                        value={`${user.firstName} ${user.lastName}`}
                         onClick={(e) => setName((e.target as HTMLInputElement).value)}
                         onChange={(e) => setName(e.target.value)}
                         onKeyDown={(e) => {
@@ -81,7 +84,7 @@ export default function PeopleDetails() {
                         {user.email}</div>)}
                 {user && editing === "email" && (
                     <FormControl className="w-50 wd-edit-email" type="email"
-                        defaultValue={`${user.email}`}
+                        value={`${user.email}`}
                         onClick={(e) => setEmail(e.currentTarget.value)}
                         onChange={(e) => setEmail(e.target.value)}
                         onKeyDown={(e) => {
