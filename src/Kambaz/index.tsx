@@ -37,7 +37,7 @@ export default function Kambaz() {
   });
   const dispatch = useDispatch();
   const addNewCourse = async () => {
-    const newCourse = await userClient.createCourse(course);
+    const newCourse = await courseClient.createCourse(course);
     setCourses([...courses, newCourse ]);
     dispatch(enroll({ _id: uuidv4(), user: currentUser._id, course: newCourse._id }));
   };
